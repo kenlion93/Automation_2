@@ -1,0 +1,33 @@
+package jason;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class POM_S2 {
+	private WebDriver driver;
+
+	// contructor
+	public POM_S2(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	// find element
+	@FindBy(xpath = "//*[@id=\"account\"]/a")
+	private WebElement myAccount;
+	@FindBy(id = "log")
+	private WebElement username;
+	@FindBy(id = "pwd")
+	private WebElement password;
+
+	// action
+	public POM_S2 loginWith(String user, String pass) {
+		username.sendKeys(user);
+		password.sendKeys(pass);
+		password.sendKeys(Keys.ENTER);
+		return this;
+	}
+}
