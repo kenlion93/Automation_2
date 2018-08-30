@@ -1,0 +1,21 @@
+package jason;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import automationCore.DriverFactory;
+
+public class POM_loginGuru extends DriverFactory {
+	@Parameters({ "yourname", "password" })
+	@Test
+	public void validlogin(String yourname, String password) throws Exception {
+		WebDriver driver = getDriver();
+		driver.manage().window().maximize();
+		driver.get("http://store.demoqa.com/");
+		Thread.sleep(2000);
+
+		POM_S2 login = new POM_S2(driver);
+
+	}
+}
