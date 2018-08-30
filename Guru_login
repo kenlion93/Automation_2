@@ -1,0 +1,39 @@
+package first_test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import automationCore.DriverFactory;
+
+public class Guru_login extends DriverFactory {
+	@Test
+	public void loginGuru() throws Exception {
+		System.out.print("Automation_Session 2");
+		WebDriver getdriver = getDriver();
+		getdriver.manage().window().maximize();
+		driver.get("http://store.demoqa.com/");
+		WebElement myAccount = driver.findElement(By.xpath("//*[@id=\"account\"]/a"));
+		myAccount.click();
+		Thread.sleep(2000);
+
+		Assert.assertTrue(driver.getCurrentUrl().equals("http://store.demoqa.com/products-page/your-account/"));
+		Thread.sleep(2000);
+
+		WebElement username = driver.findElement(By.id("log"));
+		username.sendKeys("tdcuong");
+		WebElement pwd = driver.findElement(By.id("pwd"));
+		pwd.sendKeys("12345678x@X");
+		Thread.sleep(2000);
+
+		pwd.submit();
+		Thread.sleep(5000);
+
+		Assert.assertTrue(driver.getCurrentUrl().equals("http://store.demoqa.com/products-page/your-account/?login=1"));
+		Thread.sleep(3000);
+		Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"wp-admin-bar-my-account\"]/a")).getText()
+				.equals("Howdy, tdcuong"));
+	}
+}
